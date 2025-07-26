@@ -6,6 +6,18 @@ from PIL import Image
 from torchvision.models import efficientnet_b4, EfficientNet_B4_Weights
 from torchvision import transforms
 
+# Function to download model if not present
+def download_model_from_gdrive(file_id, dest_path):
+    if not os.path.exists(dest_path):
+        st.write("Downloading model from Google Drive...")
+        url = f"https://drive.google.com/uc?id={file_id}"
+        response = requests.get(url)
+        with open(dest_path, "wb") as f:
+            f.write(response.content)
+        st.write("Model download complete.")
+
+# Download your model from Google Drive
+download_model_from_gdrive("1HNlLg7q1oH-Od5LWsN9Cuo5VXFcNBRw6", "model_fold_1.pth")
 
 # Load model
 
