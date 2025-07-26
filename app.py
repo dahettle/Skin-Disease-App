@@ -30,7 +30,9 @@ def load_model():
     model.classifier[1] = nn.Linear(model.classifier[1].in_features, 2)  # 2 output classes
 
     # Load the model weights from Reid's checkpoint
-    checkpoint = torch.load("models/model_fold_1.pth", map_location=torch.device('cpu'))
+    dest_path = "model_fold_1.pth"
+    download_model_from_gdrive("1HNlLg7q1oH-Od5LWsN9Cuo5VXFcNBRw6", dest_path)   
+    checkpoint = torch.load(dest_path, map_location=torch.device("cpu"))
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
     return model
