@@ -68,7 +68,7 @@ uploaded_file = st.file_uploader("Choose a lesion image (JPG, JPEG, PNG)", type=
 if uploaded_file:
     try:
         image = Image.open(uploaded_file).convert("RGB")
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
 
         model = load_model()
         label, confidence = predict(image, model)
