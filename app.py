@@ -55,10 +55,9 @@ def evaluation(loaded_image,trained_model):
 
     except Exception as e:
         st.error(f"Evaluation process failed")
-##st.title("Skin Disease Prediction Model") # Sets the title of the UI
 
 ## Streamlit portion of the code ##
-st.title('<p style="font-family:sans-serif; color:Green; font-size: 42px;">Skin Disease Prediction Model</p>') # Sets the title of the UI
+st.title("Skin Disease Prediction Model") # Sets the title of the UI
 st.write("Please upload an image to begin") # Guides the user what to do next
 
 loaded_image = st.file_uploader("Image type must be _JPEG_ or _PNG_") # Prompt seen on webpage to instruct user on accepted image formats
