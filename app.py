@@ -50,11 +50,11 @@ def evaluation(loaded_image,trained_model):
         input = input.unsqueeze(0)
         with torch.no_grad():
             output = trained_model(input)
-            class_pred = torch.softmax(output, dim=1)
+            class_prob = torch.softmax(output, dim=1)[0]
             # get most probable class and its probability:
-            class_prob, topclass = torch.max(class_prob, dim=1)
+            topprob, topclass = torch.max(class_prob, dim=0)
             # get class names
-            return disease_classification[class_pred, topclass]
+            return disease_classification[topclass.item()], topprob.item()
 
     except Exception as e:
         st.error(f"Evaluation failed")
