@@ -62,6 +62,7 @@ st.write("Please upload an image to begin") # Guides the user what to do next
 
 loaded_image = st.file_uploader("Image type must be _JPEG_ or _PNG_") # Prompt seen on webpage to instruct user on accepted image formats
 if loaded_image is not None: # Acceptable image has been uploaded
+try:
     display_image = Image.open(loaded_image)
     display_image.convert('RGB')
 
@@ -69,3 +70,5 @@ if loaded_image is not None: # Acceptable image has been uploaded
     classification, probability = evaluation(display_image, trained_model)
     st.info(f"Classified as: '{classification}'")
     st.info(f"Level of accuracy: '{probability:.2%}'")
+except Exception as e:
+        st.error(f"Incorrect file type")
