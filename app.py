@@ -68,4 +68,4 @@ if loaded_image is not None: #acceptable image has been uploaded
     display_image = Image.open(loaded_image)
     display_image.convert('RGB')
 
-    model = call_model()
+    trained_model = call_model()
