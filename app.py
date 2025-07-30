@@ -36,8 +36,8 @@ def call_model(path=saved_path):
         #checkpoint = torch.load(path, weights_only = True)
         checkpoint = torch.load(path, map_location=torch.device("cpu"))
         trained_model.load_state_dict(checkpoint['model_state_dict'])
-        epoch = checkpoint['epoch']
-        loss = checkpoint['loss']
+        #epoch = checkpoint['epoch']
+        #loss = checkpoint['loss']
         trained_model.eval()
         return trained_model
     except Exception as e:
