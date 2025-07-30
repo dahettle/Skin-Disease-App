@@ -69,3 +69,6 @@ if loaded_image is not None: #acceptable image has been uploaded
     display_image.convert('RGB')
 
     trained_model = call_model()
+    classification, probability = evaluation(loaded_image, trained_model)
+    st.info(f"Classified as: '{classification}'")
+    st.info(f"Achieved accuracy of: '{probability:.2%}'")
