@@ -25,8 +25,8 @@ def call_model(path=saved_path):
     try:
         trained_model=efficientnet_b4(weights=EfficientNet_B4_Weights.DEFAULT)
           # freeze other layers
-        #for param in trained_model.parameters():
-            #param.requires_grad = False
+        for param in trained_model.parameters():
+            param.requires_grad = False
         #trained_model.classifier = nn.Sequential(
             #nn.Dropout(p=0.3),
             #nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
