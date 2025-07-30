@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from PIL import Image
-from torchvision.transform import v2
+from torchvision import models, transforms
 from torchvision.models import efficientnet_b4, EfficientNet_B4_Weights
 
 correct_size = (380,380) #will be used to process the uploaded image to the correct size to work with efficientnet_b4
@@ -13,9 +13,11 @@ saved_path = "models/model_fold_1.pth" #saved location of the required trained .
 disease_classification = ['benign', 'malignant'] #skin disease classifications to be used
 
 ##function call to process image the user uploads##
-processed_image = v2.Compose([v2.RandomResizedCrop(size = (correct_size), antialias = True),
-                  v2.ToDtype(torch.float32, scale = True),
-                  v2.Normalize(mean = computed_mean, std=computed_std)])
+processed_image = transforms.Compose([
+    transforms.Resize(correct_size),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=computer_mean, std=computed_std),
+])
 
 ##Portion of code that takes the user loaded image and sends it through the trained model
 @st.cache_resource
