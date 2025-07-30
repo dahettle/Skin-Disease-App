@@ -16,7 +16,7 @@ disease_classification = ['benign', 'malignant'] #skin disease classifications t
 processed_image = transforms.Compose([
     transforms.Resize(correct_size),
     transforms.ToTensor(),
-    transforms.Normalize(mean=computer_mean, std=computed_std),
+    transforms.Normalize(mean=computed_mean, std=computed_std),
 ])
 
 ##Portion of code that takes the user loaded image and sends it through the trained model
