@@ -6,20 +6,20 @@ from PIL import Image
 from torchvision import models, transforms
 from torchvision.models import efficientnet_b4, EfficientNet_B4_Weights
 
-correct_size = (380,380) #will be used to process the uploaded image to the correct size to work with efficientnet_b4
-computed_mean = [0.5620089173316956, 0.5811969041824341, 0.7454625368118286] #values taken directly from our data_normalization.py
-computed_std = [0.21154886484146118, 0.19519373774528503, 0.20036040246486664] #values taken directly from our data_normalization.py
-saved_path = "models/model_fold_1.pth" #saved location of the required trained .pth file
-disease_classification = ['benign', 'malignant'] #skin disease classifications to be used
+correct_size = (380,380) ## Will be used to process the uploaded image to the correct size to work with efficientnet_b4
+computed_mean = [0.5620089173316956, 0.5811969041824341, 0.7454625368118286] ## Values taken directly from our data_normalization.py
+computed_std = [0.21154886484146118, 0.19519373774528503, 0.20036040246486664] ## Values taken directly from our data_normalization.py
+saved_path = "models/model_fold_1.pth" ## Saved location of the required trained .pth file
+disease_classification = ['benign', 'malignant'] ## Skin disease classifications to be used
 
-##function call to process image the user uploads##
+## Function call to process image the user uploads ##
 processed_image = transforms.Compose([
     transforms.Resize(correct_size),
     transforms.ToTensor(),
     transforms.Normalize(mean=computed_mean, std=computed_std),
 ])
 
-##Portion of code that takes the user loaded image and sends it through the trained model
+## Portion of code that takes the user loaded image and sends it through the trained model ##
 @st.cache_resource
 def call_model(path=saved_path):
     try:
@@ -27,10 +27,7 @@ def call_model(path=saved_path):
           # freeze other layers
         for param in trained_model.parameters():
             param.requires_grad = False
-        #trained_model.classifier = nn.Sequential(
-            #nn.Dropout(p=0.3),
-            #nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
-        #)
+      
         trained_model.classifier[0] = nn.Dropout(p=0.3)
         trained_model.classifier[1] = nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
         
@@ -43,7 +40,7 @@ def call_model(path=saved_path):
     except Exception as e:
         st.error(f"The user interface has experienced and error, please try again")
 
-##Portion of code responsible for prediction and evaluation
+## Portion of code responsible for prediction and evaluation
 def evaluation(loaded_image,trained_model):
     try:
         input = processed_image(loaded_image)
@@ -51,20 +48,21 @@ def evaluation(loaded_image,trained_model):
         with torch.no_grad():
             output = trained_model(input)
             class_prob = torch.softmax(output, dim=1)[0]
-            # get most probable class and its probability:
+            # Used to classify the most probable class and provide its level of accuracy
             topprob, topclass = torch.max(class_prob, dim=0)
-            # get class names
+            # Returns class name and accuracy
             return disease_classification[topclass.item()], topprob.item()
 
     except Exception as e:
-        st.error(f"Evaluation failed")
+        st.error(f"Evaluation process failed")
+##st.title("Skin Disease Prediction Model") # Sets the title of the UI
 
 ## Streamlit portion of the code ##
-st.title("Skin Disease Prediction Model") #sets the title of the UI
-st.write("Please upload an image to begin") #guides the user what to do next
+st.title('<p style="font-family:sans-serif; color:Green; font-size: 42px;">Skin Disease Prediction Model</p>') # Sets the title of the UI
+st.write("Please upload an image to begin") # Guides the user what to do next
 
-loaded_image = st.file_uploader("Image type must be _JPEG_ or _PNG_")
-if loaded_image is not None: #acceptable image has been uploaded
+loaded_image = st.file_uploader("Image type must be _JPEG_ or _PNG_") # Prompt seen on webpage to instruct user on accepted image formats
+if loaded_image is not None: # Acceptable image has been uploaded
     display_image = Image.open(loaded_image)
     display_image.convert('RGB')
 
