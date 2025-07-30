@@ -39,7 +39,7 @@ def call_model(path=saved_path):
         #epoch = checkpoint['epoch']
         #loss = checkpoint['loss']
         trained_model.eval()
-        return trained.model
+        return trained_model
     except Exception as e:
         st.error(f"The user interface has experienced and error, please try again")
 
