@@ -27,12 +27,12 @@ def call_model(path=saved_path):
           # freeze other layers
         #for param in trained_model.parameters():
             #param.requires_grad = False
-        #trained_model.classifier = nn.Sequential(
-            #nn.Dropout(p=0.3),
-            #nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
-        #)
-        trained_model.classifier[0] = nn.Dropout(p=0.3)
-        trained_model.classifier[1] = nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
+        trained_model.classifier = nn.Sequential(
+            nn.Dropout(p=0.3),
+            nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
+        )
+        #trained_model.classifier[0] = nn.Dropout(p=0.3)
+        #trained_model.classifier[1] = nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
         #checkpoint = torch.load(path, weights_only = True)
         checkpoint = torch.load(path, map_location=torch.device("cpu"))
         trained_model.load_state_dict(checkpoint['model_state_dict'])
