@@ -30,8 +30,8 @@ def call_model(path=saved_path):
       
         trained_model.classifier[0] = nn.Dropout(p=0.3)
         trained_model.classifier[1] = nn.Linear(trained_model.classifier[1].in_features, len(disease_classification))
-        
-        checkpoint = torch.load(path, map_location=torch.device("cpu"))
+        #map_location=torch.device("cpu")
+        checkpoint = torch.load(path, map_location = None)
         trained_model.load_state_dict(checkpoint['model_state_dict'])
         #epoch = checkpoint['epoch']
         #loss = checkpoint['loss']
