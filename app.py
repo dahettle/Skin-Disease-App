@@ -71,9 +71,9 @@ if loaded_image is not None: # Acceptable image has been uploaded
         st.info(f"Classified as: '{classification}'")
         st.info(f"Level of accuracy: '{probability:.2%}'")
 
-        st.write("Class probabilities:")
-        st.write(f"Benign: {probability[0]:.2%}")
-        #st.write(f"Malignant: {probability[1]:.2%}")
+        st.info("Class probabilities:")
+        st.info(f"Benign: {probability[0]:.2%}")
+        st.info(f"Malignant: {probability[1]:.2%}")
     
     except Exception as e:
         st.error(f"Incorrect file type")
