@@ -72,8 +72,8 @@ if loaded_image is not None: # Acceptable image has been uploaded
         st.info(f"Level of accuracy: '{probability:.2%}'")
 
         st.info("Class probabilities:")
-        st.info(f"Benign: '{probability[0]:.2%}'")
-        st.info(f"Malignant: '{probability[1]:.2%}'")
+        st.info(f"Benign: '{class_prob[0]:.2%}'")
+        st.info(f"Malignant: '{class_prob[1]:.2%}'")
     
     except Exception as e:
         st.error(f"Incorrect file type")
