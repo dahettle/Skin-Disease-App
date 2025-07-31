@@ -51,7 +51,7 @@ def evaluation(loaded_image,trained_model):
             # Used to classify the most probable class and provide its level of accuracy
             topprob, topclass = torch.max(class_prob, dim=0)
             # Returns class name and accuracy
-            return disease_classification[topclass.item()], topprob.item()
+            return disease_classification[topclass.item()], topprob.item(), class_prob
 
     except Exception as e:
         st.error(f"Evaluation process failed")
