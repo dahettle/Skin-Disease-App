@@ -73,7 +73,7 @@ if loaded_image is not None: # Acceptable image has been uploaded
 
         st.write("Class probabilities:")
         st.write(f"Benign: {probability[0]:.2%}")
-        st.write(f"Malignant: {probability[1]:.2%}")
+        #st.write(f"Malignant: {probability[1]:.2%}")
     
     except Exception as e:
         st.error(f"Incorrect file type")
