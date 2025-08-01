@@ -76,4 +76,4 @@ if loaded_image is not None: # Acceptable image has been uploaded
         #st.info(f"Malignant: '{class_prob[1]:.2%}'")   # Was used for troubleshooting/verification #
     
     except Exception as e:
-        st.error(f"Incorrect file type")
+        st.error(f"Error trying to load the image")
