@@ -45,7 +45,6 @@ def evaluation(loaded_image,trained_model):
     try:
         input = processed_image(loaded_image)
         input = input.unsqueeze(0)
-        st.write("Image min/max:", input.min().item(), input.max().item())
         with torch.no_grad():
             output = trained_model(input)
             class_prob = torch.softmax(output, dim=1)[0]
@@ -72,9 +71,9 @@ if loaded_image is not None: # Acceptable image has been uploaded
         st.info(f"Classified as: '{classification}'")
         st.info(f"Level of accuracy: '{probability:.2%}'")
 
-        st.info("Class probabilities:")
-        st.info(f"Benign: '{class_prob[0]:.2%}'")
-        st.info(f"Malignant: '{class_prob[1]:.2%}'")
+        #st.info("Class probabilities:")                # Was used for troubleshooting/verification #
+        #st.info(f"Benign: '{class_prob[0]:.2%}'")      # Was used for troubleshooting/verification #
+        #st.info(f"Malignant: '{class_prob[1]:.2%}'")   # Was used for troubleshooting/verification #
     
     except Exception as e:
         st.error(f"Incorrect file type")
