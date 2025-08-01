@@ -45,7 +45,7 @@ def evaluation(loaded_image,trained_model):
     try:
         input = processed_image(loaded_image)
         input = input.unsqueeze(0)
-        input_tensor = transform(image).unsqueeze(0)
+        input_tensor = transform(loaded_image).unsqueeze(0)
         st.write("Image min/max:", input_tensor.min().item(), input_tensor.max().item())
         with torch.no_grad():
             output = trained_model(input)
