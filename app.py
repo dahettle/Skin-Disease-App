@@ -6,7 +6,7 @@ from PIL import Image
 from torchvision import models, transforms
 from torchvision.models import efficientnet_b4, EfficientNet_B4_Weights
 
-correct_size = (512,512) ## Will be used to process the uploaded image to the correct size to work with efficientnet_b4
+correct_size = (380,380) ## Will be used to process the uploaded image to the correct size to work with efficientnet_b4
 computed_mean = [0.5620089173316956, 0.5811969041824341, 0.7454625368118286] ## Values taken directly from our data_normalization.py
 computed_std = [0.21154886484146118, 0.19519373774528503, 0.20036040246486664] ## Values taken directly from our data_normalization.py
 saved_path = "models/model_fold_1.pth" ## Saved location of the required trained .pth file
