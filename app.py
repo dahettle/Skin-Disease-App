@@ -59,6 +59,7 @@ def evaluation(loaded_image,trained_model):
 ## Streamlit portion of the code ##
 st.title("Skin Disease Prediction Model") # Sets the title of the UI
 st.write("Please upload an image to begin") # Guides the user what to do next
+st.write("Please consult a licensed physician or dermatologist for a second opinion after using this prediction tool")
 
 loaded_image = st.file_uploader("Image type must be _JPEG_ or _PNG_") # Prompt seen on webpage to instruct user on accepted image formats
 if loaded_image is not None: # Acceptable image has been uploaded
